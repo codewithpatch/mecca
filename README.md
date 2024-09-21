@@ -1,3 +1,13 @@
+- [Requirements](#requirements)
+- [Instructions](#instructions)
+- [Answer](#answer)
+  - [Using current model](#using-current-model)
+  - [Recommendations](#recommendations)
+    - [Data model](#data-model)
+      - [Transform the date column into a date field](#transform-the-date-column-into-a-date-field)
+      - [Create a date dimension](#create-a-date-dimension)
+    - [Apply clustering on tables](#apply-clustering-on-tables)
+
 # Requirements
 
 1. Write a query to determine total credit card transaction value by Customer_Segment for customers between the age group 30 - 40.
