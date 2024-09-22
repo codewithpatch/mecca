@@ -12,6 +12,11 @@
   - [DIM\_CARDBASE](#dim_cardbase)
   - [DIM\_DATE](#dim_date)
 - [Answer using recommended model](#answer-using-recommended-model)
+- [Query Performance Tuning](#query-performance-tuning)
+  - [Appending incremental data](#appending-incremental-data)
+  - [Reclustering](#reclustering)
+  - [Analyzing Query Profile](#analyzing-query-profile)
+  - [Analyzing Clustered table](#analyzing-clustered-table)
 
 # Requirements
 
@@ -316,3 +321,28 @@ CREATE DIM_CARDBASE (
     FROM MONTHLY_TRANS
     ORDER BY YEARMONTH DESC
     ```
+
+# Query Performance Tuning
+
+## Appending incremental data
+
+- Since we are applying clustering to our tables, it is important to note that snowflake recommends that there is a high queries to DML operations.
+- We would like to append our data less frequently by inserting them by large batches.
+
+## Reclustering
+
+- As we perform DML operations on our clustered tables, the data in our table might become less clustered. Snowflake suggests that periodic/regular reclustring of the table is required to main optimal reclustering.
+- We can also turn ON our automated reclustering so snowflake will handle it for us. Snowflake will only apply reclustering on our table if it will benefit our operation.
+- Since reclustering of clustered table consumes snowflake credit, we can lessen this by making sure that we are ordering our dataset before appending to the clustered table to not mess up with the original clustering.
+
+## Analyzing Query Profile
+
+- Snowflake offers a query profile feature to enable users to analyze any query that has been ran against it's virtual warehouse.
+- Upon analyzing our query profile, we would be able to get information if we can still improve our query performance.
+- We can apply basic query performance tuning technique by modifying our SQL queries.
+- Since query profile also shows how the data is read from our table's micro partition, if we noticed that there is a high ratio of partitions read vs total number of partition, we can review the clustering of our tables or apply reclustering.
+
+## Analyzing Clustered table
+
+- Snowflake offers a system function `SYSTEM$CLUSTERING_INFORMATION` to calculate clustering details such as clustering depth for a given table.
+- We want to aim for a low number of clustering depth and partition overlaps to ensure higher query performance.
