@@ -44,9 +44,8 @@ answer them efficiently.
 
 ## Using current model
 
-
-- Since snowflake stores data in columnar bases storage, it is very important for our query to use only the columns which we need for our data.
-- It will make our query more efficient because snowflake will only access or ready on the columns we specify from the query.
+- Since snowflake stores data in columnar format storage, it is recommended to only use columns which we need for our data.
+- It will make our query more efficient because snowflake will only acess the columns we specify from the query.
 
 ![alt text](datamodel.png)
 
