@@ -319,10 +319,12 @@ CREATE DIM_CARDBASE (
         (MONTHLY_TRANSACTIONS - PREVIOUS_MONTH_TRANS) / PREVIOUS_MONTH_TRANS * 100 AS MONTHLY_GROWTH_RATE,
         SUM(MONTHLY_TRANSACTIONS) OVER(PARTITION BY TRANS_YEAR ORDER BY YEARMONTH) AS YTD_TRANSACTION
     FROM MONTHLY_TRANS
-    ORDER BY YEARMONTH DESC
+    ORDER BY YEARMONTH DESC;
     ```
 
 # Query Performance Tuning
+
+There will be cases where we will encounter a slow running queries as we build our reports from our model. That's why this step is very important for us to reach our optimal query perfomance.
 
 ## Appending incremental data
 
