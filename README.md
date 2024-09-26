@@ -95,6 +95,7 @@ answer them efficiently.
             card.CUST_ID AS CUST_ID,
             SUM(card.CREDIT_LIMIT) AS TOTAL_CARD_LIMIT
         FROM cardbase_csv card
+        GROUP BY 1
     )
     SELECT
         TRANS.CUST_ID AS CUST_ID,
